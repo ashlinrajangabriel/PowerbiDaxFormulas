@@ -1,0 +1,12 @@
+Calendar Relative = 
+
+VAR MinDate = YEAR(MIN(Regression[Date]))
+VAR MaxDate = YEAR(MIN(Regression[Date]))
+RETURN
+ADDCOLUMNS(
+  FILTER(
+	CALENDARAUTO(),
+YEAR( [Date]) >= MinDate && 
+YEAR( [Date]) >= MaxDate
+),
+"Year", YEAR ( [Date] ), "Month", FORMAT( [Date], "mmmm" ), "Month Number", MONTH([DATE]))
