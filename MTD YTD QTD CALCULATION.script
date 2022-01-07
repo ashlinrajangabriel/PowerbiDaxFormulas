@@ -1,0 +1,20 @@
+MTD/QTD/YTD Selection = 
+VAR TodayDate=TODAY()  
+VAR  YearStart = CALCULATE(STARTOFYEAR(Regression[Date]),YEAR(Regression[Date])=YEAR(TodayDate)) 
+VAR QuarterStart = CALCULATE(STARTOFQUARTER(Regression[Date]),YEAR(Regression[Date])=YEAR(TodayDate),QUARTER(Regression[Date])=QUARTER(TodayDate) )
+VAR MonthStart = CALCULATE(STARTOFMONTH(Regression[Date]),YEAR(Regression[Date])=YEAR(TodayDate),MONTH(Regression[Date])=MONTH(TodayDate) )
+VAR Result = UNION  ( 
+	ADDCOLUMNS (
+		CALENDAR (YearStart,TodayDate),
+		"Selection","YTD"
+),
+	ADDCOLUMNS (
+		CALENDAR (QuarterStart,TodayDate),
+		"Selection","QTD"
+),
+	ADDCOLUMNS (
+		CALENDAR (MonthStart,TodayDate),
+		"Selection","MTD"
+)
+) RETURN
+Result
